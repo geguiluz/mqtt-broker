@@ -1,8 +1,6 @@
 var mosca = require('mosca');
 
-const config = require('config');
-
-const mqttDB = config.get('ascoltatoreURI');
+const mqttDB = process.env.ASC_URI;
 
 // Configure the pub/sub settings with Mongo
 var pubsubsettings = {
@@ -24,8 +22,8 @@ var server = new mosca.Server(moscaSettings); //here we start mosca
 
 var authenticate = function(client, username, password, callback) {
   var authorized =
-    username === config.get('mqttUSer') &&
-    password.toString() === config.get('mqttPassword');
+    username === process.env.MQTT_USER &&
+    password.toString() === process.env.MQTT_PASSWORD;
   if (authorized) client.user = username;
   callback(null, authorized);
 };
