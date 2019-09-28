@@ -21,10 +21,20 @@ var moscaSettings = {
 };
 
 var server = new mosca.Server(moscaSettings); //here we start mosca
+
+var authenticate = function(client, username, password, callback) {
+  var authorized =
+    username === config.get('mqttUSer') &&
+    password.toString() === config.get('mqttPassword');
+  if (authorized) client.user = username;
+  callback(null, authorized);
+};
+
 server.on('ready', setup); //on init it fires up setup()
 
 // fired when the mqtt server is ready
 function setup() {
+  server.authenticate = authenticate;
   console.log('Mosca server is up and running');
 }
 
