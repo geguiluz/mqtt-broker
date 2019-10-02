@@ -21,12 +21,12 @@ var moscaSettings = {
 
 var server = new mosca.Server(moscaSettings); //here we start mosca
 
-console.log(
-  'Credentials: ',
-  process.env.MQTT_USER,
-  process.env.MQTT_PASSWORD,
-  process.env.ASC_URI
-);
+// console.log(
+//   'Credentials: ',
+//   process.env.MQTT_USER,
+//   process.env.MQTT_PASSWORD,
+//   process.env.ASC_URI
+// );
 
 var authenticate = function(client, username, password, callback) {
   var authorized =
